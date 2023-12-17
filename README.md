@@ -41,3 +41,27 @@ A low level tem uma comunicação direta com o kernel, já o high level não tem
 
 O OCI foi o criador do conceito de contêiner e ele fez isso a parir de uma iniciativa de software livre com o intuito de fazer com que todos os contêineres criados se conversem.
 No caso, a ideia era criar uma normalidade para os contêineres, obrigando a todos os que vierem depois a seguir um mesmo caminho.  
+
+Kubernetes foi desenvolvido pelo google em 2014, não era aberto ao publico e tinha o nome de boorg, por isso foi desenvolvido em GO.
+
+### Arquitetura do Kubernetes
+
+Computadores são chamados de NODES.
+
+Temos os computadores são chamados de control plane e workes 
+
+Control plane controla o clusters, é responsabilidade dele de controlar a saude e o estado do clusters.
+
+Os Workes são os responsaveis em carregar as aplições, são os nodes que rodam as aplicações.
+
+É possivel carregar as aplicações nos control planes porém não é o recomendado.
+
+### Componentes do control planes
+
+Dentro do control planes temos muitos componentes, um dos mais importantes é o ETCD, ele é o banco do cluster, 
+não é banco de dados, porém ele guarda todo o estado no cluster.
+
+Ele é considerado o cerebro de todo o cluster e caso você mesmo esteja gerenciando o cluster saiba que é necessario ter diversas redundancias dessa aaplição.
+
+
+
