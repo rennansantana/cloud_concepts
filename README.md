@@ -63,5 +63,20 @@ não é banco de dados, porém ele guarda todo o estado no cluster.
 
 Ele é considerado o cerebro de todo o cluster e caso você mesmo esteja gerenciando o cluster saiba que é necessario ter diversas redundancias dessa aaplição.
 
+Cada nó do control plane pode ter ou não um ETCD.
 
+O ETCD guarda as informações que o Kube APIserver passa para ele, o Kube é quem conversa com todos os componentes e armazena as informações no ETCD,
+nesse caso o ETCD seria a parte do cerebro que armazena. Já a parte pensante, a que processa dados, seria o Kube APIserver, toda a comunicação do cluster passa por ele.
+
+Lembrando que o ETCD conversa apenas com o Kube APIserver que por sua vez conversa com todo o control plane.
+
+já a proxima parte do control plane é o Kube Scheduler, ele assim como o nome diz é de agendamento, ele é responsavel pelo gerenciamento/agendamento e por definir aonde vai os conteiners.
+
+Seguimos agora com o Kube controle manager, esse é o controlador de todos as partes dentro do control plane, o controlador do cluster.
+Dentro do kubernets tem varios controladores, um para cada parte.
+
+
+
+
+ 
 
