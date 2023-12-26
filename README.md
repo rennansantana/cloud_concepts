@@ -46,11 +46,11 @@ Kubernetes foi desenvolvido pelo google em 2014, não era aberto ao publico e ti
 
 ### Arquitetura do Kubernetes
 
-*Computadores são chamados de NODES.	
-*Temos os computadores são chamados de control plane e workes 	
-*Control plane controla o clusters, é responsabilidade dele de controlar a saude e o estado do clusters.	
-*Os Workes são os responsaveis em carregar as aplições, são os nodes que rodam as aplicações.	
-*É possivel carregar as aplicações nos control planes porém não é o recomendado.	
+*Computadores são chamados de NODES.  
+*Temos os computadores são chamados de control plane e workes   
+*Control plane controla o clusters, é responsabilidade dele de controlar a saude e o estado do clusters.  
+*Os Workes são os responsaveis em carregar as aplições, são os nodes que rodam as aplicações.  
+*É possivel carregar as aplicações nos control planes porém não é o recomendado.  
 
 ### Componentes do control planes
 
