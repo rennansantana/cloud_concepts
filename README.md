@@ -47,7 +47,7 @@ Kubernetes foi desenvolvido pelo google em 2014, não era aberto ao publico e ti
 ### Arquitetura do Kubernetes
 
 *Computadores são chamados de NODES.  
-*Temos os computadores são chamados de control plane e workes   
+*Temos os computadores são chamados de control plane e workes.   
 *Control plane controla o clusters, é responsabilidade dele de controlar a saude e o estado do clusters.  
 *Os Workes são os responsaveis em carregar as aplições, são os nodes que rodam as aplicações.  
 *É possivel carregar as aplicações nos control planes porém não é o recomendado.  
@@ -71,8 +71,50 @@ já a proxima parte do control plane é o Kube Scheduler, ele assim como o nome 
 Seguimos agora com o Kube controle manager, esse é o controlador de todos as partes dentro do control plane, o controlador do cluster.
 Dentro do kubernets tem varios controladores, um para cada parte.
 
+### Conponentes dos workes
 
+O primeiro componente que temos no funcionamento dos workes é o Kubelet, ele é como se fosse o agente, ele fica dentro de todos os nós que temos nos workes.
+Ele é quem sempre vai estar vendo se esta tudo OK com os conteiners e se não precisa fazer algo a mais por eles, ele entra especificamente com o APIserver.
 
+O proximo componente assim como o kubelet também esta em todos os nós/nodes, esse é o kube proxy, ele que faz a comunicação dos nodes com os resto do mundo, ele que faz o conteiner se comunicar pela internet.
 
- 
+### Portas TCP e UDP
+
+Abaixo esteremos indicando cada porta que o kubernetes precisa para estar funcionando perfeitamente.
+
+*APIserver = 6443 - TCP   
+*ETCD = 2379 - 2380 - TCP  
+*Kube Scheduler = 10251 - TCP  
+*Kubelet = 10250 - TCP  
+*Kube controler = 10252 - TCP   
+
+O unico que não tem uma porta propria é o Kube proxy, porém tem um outro componente chamado Nodeport, esse é o encarregado em conectar seu serviço que pode estar usando qualquer porta com uma porta do nó.
+
+Porém essa porta sempre vai ser uma "alta", começando pela 30000 até a 32767 (TCP), caso você va usar o node porte como serviço precisa habilitar também as portas descritas anteriormente.
+Agora se for utilizar apenas os componentes padrão, será necessario apenas as portas na tabela acima, pois essas são as comuns.
+
+Outro componente que também utiliza uma porta especifica é wave net, esse utiliza a porta 6783 (TCP e UDP), o que esse componente faz nos explicaremos mais para frente.
+
+### Introduçao ao pods, replica sets, deployments e service.
+
+Quando falamos de Kubernetes, o menor componente de gerenciamento não é o conteiner é são os pods.
+Um pod, ele contem um conteiner porém não só um como varios, se um ou mais conteiner estão dentro do mesmo pode, eles compartilhão as mesmas informações/comfigurações.
+
+Um pode tem somente um IP, mesmo que tenha mais de um conteiners.
+
+Se eu quiser ter mais de um pod que funcione da mesma forma, basta copiar um pod e colar quantas vezes for necessario.
+
+Os conteiners ficam dentro do pod, os pods dentro dos nodes (nós), e se eu quiser gerenciar tudo isso eu utilizo o deployment.
+
+O Deployments por sua vez tem um nome, como por exemplo, giropops.
+
+Já o replica sets seria o responsavel pelas replicas, pelos nodes, e sempre que cair um node quem vai criar um novo para pleno funcionamento e o replica sets.
+O replica sets e criado pelo deployments, e quando  eu mudo algo no deployment ele mata o replica sets antigo e cria um novo com as configurações atualizadas.
+
+Todos os componentes acima estão dentro do que nos chamamos de sercice, existem varios tipos de service, o do exemplo é o service node port, esse é responsavel pelo acesso aos podes pelo lado de fora do nó.
+
+Agora quando eu quiser acessar um node, especificamente um conteiner dentro dele, eu preciso me conectar na porta "alta" que por exemplo pode ser a 30001.
+Essa que foi atrelada atravez do node port a porta que o componente usa para trabahar, como por exemplo a porta 80.
+É dessa forma que acessamos os conteiners, que de forma escrita ficaria http://node:30001.
+
 
